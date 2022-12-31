@@ -2,7 +2,7 @@
 
 ## Dependencies
 
-my_moveit2_config
+[my_moveit2_config](https://github.com/christophomos/my_moveit2_config)
 
 ## Setup
 
