@@ -2,6 +2,10 @@
 
 ## Dependencies
 
+my_moveit2_config
+
+## Setup
+
 `git` shell
 ```
 git config --global user.email christophomos@gmail.com
