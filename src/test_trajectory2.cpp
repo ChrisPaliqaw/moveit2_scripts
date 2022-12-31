@@ -48,18 +48,20 @@ public:
                                                this->joint_group_positions_arm);
   }
 
-  void plan_arm_joint_space() {
+  // Plan to End-Effector Pose
+  void plan_ee_pose() {
 
-    RCLCPP_INFO(LOGGER, "Planning to Joint Space");
+    RCLCPP_INFO(LOGGER, "Planning to End-Effector Pose");
 
-    //joint_group_positions_arm[0] = 0.00;  // Shoulder Pan
-    joint_group_positions_arm[1] = -2.50;  // Shoulder Lift
-    joint_group_positions_arm[2] = 1.50;  // Elbow
-    joint_group_positions_arm[3] = -1.50;  // Wrist 1
-    joint_group_positions_arm[4] = -1.55;  // Wrist 2
-    //joint_group_positions_arm[5] = 0.00;  // Wrist 3
+    target_pose1.orientation.x = -1.0;
+    target_pose1.orientation.y = 0.00;
+    target_pose1.orientation.z = 0.00;
+    target_pose1.orientation.w = 0.00;
+    target_pose1.position.x = 0.343;
+    target_pose1.position.y = 0.132;
+    target_pose1.position.z = 0.284;
 
-    move_group_arm.setJointValueTarget(joint_group_positions_arm);
+    move_group_arm.setPoseTarget(target_pose1);
 
     bool success_arm = (move_group_arm.plan(my_plan_arm) ==
                         moveit::planning_interface::MoveItErrorCode::SUCCESS);
@@ -72,12 +74,13 @@ public:
     this->timer_->cancel();
     get_info();
     current_state();
-    plan_arm_joint_space();
+    plan_ee_pose();
   }
 
 private:
   moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
   std::vector<double> joint_group_positions_arm;
+  geometry_msgs::msg::Pose target_pose1;
   moveit::planning_interface::MoveGroupInterface::Plan my_plan_arm;
   rclcpp::TimerBase::SharedPtr timer_;
 

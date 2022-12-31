@@ -53,9 +53,24 @@ ament_target_dependencies(test_trajectory
 	moveit_ros_planning
 	control_msgs)
 
+add_executable(test_trajectory2
+    src/test_trajectory2.cpp)
+target_include_directories(test_trajectory2
+    PUBLIC include)
+ament_target_dependencies(test_trajectory2
+    ament_cmake
+	rclcpp
+	rclcpp_action
+	moveit_core
+	moveit_ros_planning_interface
+	interactive_markers
+	moveit_ros_planning
+	control_msgs)
+
 # Install the executable
 install(TARGETS 
 	test_trajectory
+	test_trajectory2
     DESTINATION lib/${PROJECT_NAME}
 )
 
